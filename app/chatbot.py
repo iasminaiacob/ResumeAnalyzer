@@ -12,7 +12,6 @@ chat_model = genai.GenerativeModel("gemini-1.5-flash")
 def start_chat_with_context(job_description: str, top_k: int = 5):
     """Start a Gemini chat with initial RAG context"""
     results = search_similar_chunks(job_description, top_k=top_k)
-    # Group chunks by filename
     MAX_CHUNKS_PER_RESUME = 3
 
     grouped = defaultdict(list)
@@ -20,7 +19,6 @@ def start_chat_with_context(job_description: str, top_k: int = 5):
         if len(grouped[r["filename"]]) < MAX_CHUNKS_PER_RESUME:
             grouped[r["filename"]].append(r["chunk"])
 
-    # Format as: Candidate: XYZ\n[chunk1]\n[chunk2]...
     context = "\n\n".join(
         f"Candidate: {filename}\n---\n" + "\n".join(chunks)
         for filename, chunks in grouped.items()
@@ -48,14 +46,11 @@ Answer with a summary of matching candidates and their strengths.
 
 
 def generate_rag_answer(job_description: str, top_k: int = 5) -> str:
-    # Step 1: Get relevant chunks
     results = search_similar_chunks(job_description, top_k=top_k)
 
     if not results:
         return "No relevant candidates found."
-
-    # Step 2: Build prompt
-    # Group chunks by filename
+    
     MAX_CHUNKS_PER_RESUME = 3
 
     grouped = defaultdict(list)
@@ -63,7 +58,6 @@ def generate_rag_answer(job_description: str, top_k: int = 5) -> str:
         if len(grouped[r["filename"]]) < MAX_CHUNKS_PER_RESUME:
             grouped[r["filename"]].append(r["chunk"])
 
-    # Format as: Candidate: XYZ\n[chunk1]\n[chunk2]...
     context = "\n\n".join(
         f"Candidate: {filename}\n---\n" + "\n".join(chunks)
         for filename, chunks in grouped.items()

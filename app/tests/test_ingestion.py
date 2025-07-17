@@ -8,4 +8,4 @@ resumes = ingest_resumes("resumes")
 
 for res in resumes:
     print(f"\n=== {res['filename']} ===")
-    print(res['content'][:500])  # Print first 500 chars only
+    print(res['content'][:500])  #print first 500 chars only

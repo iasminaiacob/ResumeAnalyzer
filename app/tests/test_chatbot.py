@@ -11,5 +11,5 @@ Knowledge of ASPP, embedded systems, and safety-critical pipelines is a plus.
 
 answer = generate_rag_answer(job_description, top_k=15)
 
-print("\n=== AI Feedback ===\n")
+print("\nAI Feedback\n")
 print(answer)

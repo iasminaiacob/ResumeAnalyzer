@@ -11,8 +11,8 @@ We are looking for an experienced AI/ML Engineer with strong Python and Computer
 chat = start_chat_with_context(job_desc, top_k=15)
 
 while True:
-    user_msg = input("👤 You: ")
+    user_msg = input("You: ")
     if user_msg.lower() in {"exit", "quit"}:
         break
     response = chat.send_message(user_msg)
-    print("\n🤖 Gemini:", response.text.strip())
+    print("\nGemini:", response.text.strip())
