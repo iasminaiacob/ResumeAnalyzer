@@ -2,7 +2,5 @@
 node_modules
 __pycache__/
 *.pyc
-resume-analyzer-ui/node_modules/
-resume-analyzer-ui/.next/
 resumes/
 temp_resume.pdf
