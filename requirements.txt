@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+langchain
+sentence-transformers
+psycopg[binary]
+python-dotenv
+pdfminer.six
+PyMuPDF
+tqdm
+google-generativeai
+python-multipart
+uuid
+boto3
