@@ -28,3 +28,30 @@ A full-stack AI-powered system that analyzes resumes against job descriptions us
 Run `chat_loop.py` to start a conversational session:
 ```bash
 python app/chat_loop.py
+```
+
+### Testing
+You’ll find test files for: resume ingestion, embedding pipeline, vector similarity search and chatbot output.
+
+### Running the app
+Clone the repository: git clone https://github.com/iasminaiacob/ResumeAnalyzer/
+Create a .env file in the repo:
+```bash
+POSTGRES_URL=your_postgres_connection_string
+GEMINI_API_KEY=your_gemini_api_key
+```
+Install dependencies: pip install -r requirements.txt
+Start the backend server: uvicorn app.api:app --reload
+Run the frontend:
+```bash
+cd resume-analyzer-ui
+npm install
+npm run dev
+```
+
+Example Use:
+Upload resumes
+Write job description in the frontend or CLI
+Add new resume
+Click "Compare All Candidates" and receive Gemini-generated summary of best matches
+Click "Analyze" and receive Gemini-generated summary of whether the new candidate's resume is a match or not, and why.
