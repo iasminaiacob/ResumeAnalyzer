@@ -3,6 +3,7 @@ uvicorn
 langchain
 sentence-transformers
 psycopg[binary]
+psycopg2
 python-dotenv
 pdfminer.six
 PyMuPDF

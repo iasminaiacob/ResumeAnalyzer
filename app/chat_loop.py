@@ -4,9 +4,14 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from app.chatbot import start_chat_with_context
 
-job_desc = """
-We are looking for an experienced AI/ML Engineer with strong Python and Computer Vision skills.
-"""
+print("Enter the job description (press Enter twice to lock in): ")
+lines = []
+while True:
+    line = input()
+    if not line.strip():
+        break
+    lines.append(line)
+job_desc = "\n".join(lines)
 
 chat = start_chat_with_context(job_desc, top_k=15)
 

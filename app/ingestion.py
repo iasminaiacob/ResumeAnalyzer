@@ -6,7 +6,6 @@ import fitz  # PyMuPDF
 from pdfminer.high_level import extract_text as extract_pdfminer_text
 
 def extract_text_from_pdf(filepath: str) -> str:
-    """Extract text from a PDF file using PyMuPDF"""
     try:
         doc = fitz.open(filepath)
         text = ""
@@ -18,7 +17,6 @@ def extract_text_from_pdf(filepath: str) -> str:
         return extract_pdfminer_text(filepath)  # fallback
 
 def extract_text_from_txt(filepath: str) -> str:
-    """Read plain text file"""
     with open(filepath, "r", encoding="utf-8") as f:
         return f.read()
 
@@ -41,3 +39,4 @@ def ingest_resumes(folder_path: str) -> List[Dict]:
             "content": text.strip()
         })
     return parsed
+
