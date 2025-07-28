@@ -1,13 +1,14 @@
 import os
-import psycopg
+import psycopg #postgres driver
 from dotenv import load_dotenv
 from app.embedding import embed_chunks
 
 load_dotenv()
-conn = psycopg.connect(os.getenv("POSTGRES_URL"), autocommit=True)
+conn = psycopg.connect(os.getenv("POSTGRES_URL"), autocommit=True) 
 
 def setup_db():
-    with conn.cursor() as cur:
+    with conn.cursor() as cur: #create a cursor to execute SQL commands
+        #create the vector extension and table if they don't exist
         cur.execute("""
             CREATE EXTENSION IF NOT EXISTS vector;
                     
@@ -37,9 +38,9 @@ def insert_chunks(chunk_data: list):
             )
     print(f"Inserted {len(chunk_data)} chunks into the database.")
 
-def search_similar_chunks(job_description: str, top_k: int = 5) -> list:
+def search_similar_chunks(job_description: str, top_k: int = 5) -> list: #top_k - number of results to return
     """Embed job description and perform vector similarity search"""
-    query_embedding = embed_chunks([job_description])[0]
+    query_embedding = embed_chunks([job_description])[0] 
 
     with conn.cursor() as cur:
         cur.execute(
@@ -50,8 +51,8 @@ def search_similar_chunks(job_description: str, top_k: int = 5) -> list:
             LIMIT %s;
             """,
             (query_embedding, query_embedding, top_k)
-        )
-
+        ) #the order by clause sorts results by distance to the query vector
+        #which means the closest matches come first
 
         results = cur.fetchall()
 

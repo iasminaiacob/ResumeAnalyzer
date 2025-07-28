@@ -7,13 +7,14 @@ from dotenv import load_dotenv
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-EMBED_MODEL = "models/embedding-001"
+EMBED_MODEL = "models/embedding-001" #Gemini embedding model
 
 
 def chunk_text(text: str, chunk_size: int = 400, chunk_overlap: int = 100) -> List[str]:
+    #split text into chunks of max chunk_size chars with overlap of chunk_overlap chars
+    #RecursiveCharacterTextSplitter splits text intelligently based on paragraphs and sentences
     splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
     return splitter.split_text(text)
-
 
 def embed_chunks(chunks: List[str]) -> List[List[float]]:
     """Generate embeddings using Gemini embedding-001 model"""
@@ -29,9 +30,6 @@ def embed_chunks(chunks: List[str]) -> List[List[float]]:
         embeddings.append(response["embedding"])
 
     return embeddings
-
-
-
 
 def process_resume_chunks(resumes: List[Dict]) -> List[Dict]:
     results = []

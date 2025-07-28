@@ -4,6 +4,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from app.chatbot import start_chat_with_context
 
+#Test example of starting a chat with context based on a job description
+
 print("Enter the job description (press Enter twice to lock in): ")
 lines = []
 while True:

@@ -4,6 +4,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from app.vector_store import search_similar_chunks
 
+#Test example of searching for similar chunks in the vector store
+
 job_desc = """
 We are looking for an experienced AI/ML Engineer with strong Python skills.
 """

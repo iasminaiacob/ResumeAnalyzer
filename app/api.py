@@ -14,7 +14,7 @@ import shutil
 app = FastAPI()
 
 app.add_middleware(
-    CORSMiddleware,
+    CORSMiddleware, #CORS is used for frontend-backend communication
     allow_origins=["http://localhost:3000"], 
     allow_credentials=True,
     allow_methods=["*"],
@@ -23,7 +23,7 @@ app.add_middleware(
 
 UPLOAD_DIR = "resumes"
 
-@app.post("/upload/")
+@app.post("/upload/") #uploads resumes to the server
 async def upload_resume(file: UploadFile = File(...)):
     os.makedirs(UPLOAD_DIR, exist_ok=True)
     file_path = os.path.join(UPLOAD_DIR, file.filename)
@@ -36,12 +36,12 @@ async def upload_resume(file: UploadFile = File(...)):
     return {"message": f"{file.filename} uploaded and processed."}
 
 
-@app.post("/generate/")
+@app.post("/generate/") #generates an answer based on the job description
 async def generate_answer(job_description: str = Form(...)):
     answer = generate_rag_answer(job_description, top_k=15)
     return {"answer": answer}
 
-@app.post("/save_resume/")
+@app.post("/save_resume/") #saves the uploaded resume and processes it
 async def save_resume(file: UploadFile = File(...)):
     os.makedirs(UPLOAD_DIR, exist_ok=True)
     file_path = os.path.join(UPLOAD_DIR, file.filename)
@@ -53,7 +53,7 @@ async def save_resume(file: UploadFile = File(...)):
     insert_chunks(chunks)
     return {"message": f"{file.filename} saved and added to database."}
 
-@app.post("/analyze_resume/")
+@app.post("/analyze_resume/") #analyzes the resume uploaded against a job description
 async def analyze_resume(file: UploadFile = File(...), job_description: str = Form(...)):
     content = await file.read()
     with open("temp_resume.pdf", "wb") as f:
