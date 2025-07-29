@@ -21,7 +21,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-UPLOAD_DIR = "resumes"
+UPLOAD_DIR = "resumes_test"
 
 @app.post("/upload/") #uploads resumes to the server
 async def upload_resume(file: UploadFile = File(...)):

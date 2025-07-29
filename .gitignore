@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 resumes/
 temp_resume.pdf
+resumes_test/
